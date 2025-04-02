@@ -1,0 +1,40 @@
+<!-- herdar de index -->
+{%extends "index.html"%} 
+
+{% block menu %}
+    {% include "menu.html" %}
+
+    <div class="container mt-5"> 
+        <h3 class=" text-center  ">lista</h3>
+        <div>
+            <a href="/vistaGenero">
+                <button type="button" class="btn btn-primary">Agregar Genero</button>
+            </a>
+        </div>
+        <table class=" table table-bordered table-hover mt-3 table-sm border border-primary table-striped table-responsive w-50">
+            <thead>
+                <tr class="bg-primary text-white">
+                    <th>Nombre</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for genero in generos %}
+                    <tr>
+                        <td>{{genero.nombre}}</td>
+                        <td>
+                            <i class="fa fa-edit btn btn-primary"></i>
+                            <i class="fa fa-trash btn btn-danger"></i>
+                        </td>
+                    </tr>
+                {% endfor %}    
+
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{% block piePagina %}
+    {% include "piePagina.html" %}
+{% endblock %}

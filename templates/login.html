@@ -1,0 +1,20 @@
+{% extends "index.html" %}
+
+{% block content %}
+<script src="../static/js/app.js"></script>
+    <div class="container mt-5"> 
+        <h3 class=" text-center  ">Login</h3>
+        <form id="frmLogin" enctype="multipart/form-data">
+            <h3>Login</h3>
+            <div class="mb-3">
+                <label class="form-label">Usuario:</label>
+                <input type="text" class="form-control" name="txtUser" id="txtUser" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password:</label>
+                <input type="password" class="form-control" name="txtPassword" id="txtPassword" required> 
+            </div>
+            <button type="button" class="btn btn-primary" onclick="login()">Login</button>
+        </form>
+    </div>
+{% endblock %}

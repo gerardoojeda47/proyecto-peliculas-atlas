@@ -1,0 +1,58 @@
+<!-- heredar propiedades de index.html -->
+{% extends "index.html" %}
+
+<!-- agregar el menu de la pagina -->
+{% block menu %}
+    {% include "menu.html" %}
+{% endblock %}
+
+{% block content %}
+    <script src="../static/js/app.js"></script>
+
+    <div class="container mt-5"> 
+        <h3 class=" text-center  ">Lista de peliculas</h3>
+        <div>
+            <a href="/agregarPelicula">
+                <button type="button" class="btn btn-primary">Agregar Genero</button>
+            </a>
+        </div>
+        <table class=" table table-bordered table-hover mt-3 table-sm border border-primary table-responsive w-50">
+            <thead>
+                <tr class="bg-primary text-white">
+                    <th>Código</th>
+                    <th>Título</th>
+                    <th>Duración</th>
+                    <th>Protagonistas</th>
+                    <th>Género</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pelicula in peliculas %}
+                    <tr>
+                        <td>{{pelicula.codigo}}</td>
+                        <td>{{pelicula.titulo}}</td>
+                        <td>{{pelicula.duracion}}</td>
+                        <td>{{pelicula.protagonistas}}</td>
+                        <td>
+                            {% for genero in generos %}
+                                {% if genero.id == pelicula.genero.id %} 
+                                    {{genero.nombre}} 
+                                {% endif %} <!-- Agrega coma solo entre géneros -->
+                            {% endfor %}
+                        </td>
+                        <td class="text-center" >
+                            <a href="/editarPeliculas/{{pelicula.id}}">
+                                <i title="Editar" class="fa fa-edit btn btn-primary" onclick="editarPelicula('{{pelicula.id}}')" ></i> 
+
+                            </a>
+                            <a href="/eliminarPeliculas/{{pelicula.id}}">
+                                <i class="fa fa-trash  btn btn-success" title="Eliminar"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
