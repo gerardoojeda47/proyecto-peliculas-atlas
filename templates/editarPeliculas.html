@@ -40,7 +40,7 @@
                 <textarea name="txtResumen" id="txtResumen" cols="30" rows="3" class="form-control"  required>{{pelicula['resumen']}}</textarea>
             </div>
             <div >
-                <button type="button" class="btn btn-primary" onclick="editarPelicula('{{pelicula.id}}')">Guardar</button>
+                <button type="button" class="btn btn-primary" onclick="editarPelicula('{{pelicula['id']}}')">Guardar</button>
                 <a href="/peliculasVista">
                     <button type="button" class="btn btn-danger">Cancelar</button>
                 </a>

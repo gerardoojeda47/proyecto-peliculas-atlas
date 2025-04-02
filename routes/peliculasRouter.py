@@ -1,6 +1,7 @@
 from flask import request, jsonify, render_template
 from app import app
 from models.pelicula import Pelicula, Genero
+from app import login_requerido
 
 @app.route('/peliculas', methods=['GET'])
 def get_peliculas():
@@ -45,7 +46,7 @@ def actualizarPelicula(id):
             else:
                 data["genero"] = genero # reemplazar el id del genero por el objeto
                 pelicula.update(**data)
-                return jsonify({"message": "Pelicula actualizada"}, pelicula), 200
+                return jsonify({"message": "Pelicula actualizada"}), 200
             
     except Exception as e:
         return jsonify({"message": str(e)}), 500
@@ -63,8 +64,8 @@ def eliminarPelicula(id):
     except Exception as e:
         return jsonify({"message": str(e)}), 500
     
-
 @app.route('/listarPeliculas', methods=['GET'])
+@login_requerido 
 def vistaListarPeliculas():
     try:
         peliculas = Pelicula.objects()
@@ -95,7 +96,7 @@ def addPelicula():
             pelicula = Pelicula(**data) 
             pelicula.save()
             return jsonify({
-                "message": "✅ Documento guardado",
+                "message": "Pelicula guardada",
                 "data": pelicula.to_json()  # convierte la película a JSON si es un documento de MongoEngine
             }), 200
 

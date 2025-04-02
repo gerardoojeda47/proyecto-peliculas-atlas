@@ -13,7 +13,7 @@
         <h3 class=" text-center  ">Lista de peliculas</h3>
         <div>
             <a href="/agregarPelicula">
-                <button type="button" class="btn btn-primary">Agregar Genero</button>
+                <button type="button" class="btn btn-primary">Agregar Películas</button>
             </a>
         </div>
         <table class=" table table-bordered table-hover mt-3 table-sm border border-primary table-responsive w-50">
@@ -43,11 +43,11 @@
                         </td>
                         <td class="text-center" >
                             <a href="/editarPeliculas/{{pelicula.id}}">
-                                <i title="Editar" class="fa fa-edit btn btn-primary" onclick="editarPelicula('{{pelicula.id}}')" ></i> 
+                                <i title="Editar" class="fa fa-edit btn btn-primary" ></i> 
 
                             </a>
                             <a href="/eliminarPeliculas/{{pelicula.id}}">
-                                <i class="fa fa-trash  btn btn-success" title="Eliminar"></i>
+                                <i class="fa fa-trash  btn btn-danger" title="Eliminar"></i>
                             </a>
                         </td>
                     </tr>

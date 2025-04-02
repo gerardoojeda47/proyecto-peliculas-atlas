@@ -1,7 +1,7 @@
 function agregarGenero() {
-
+    console.log("ingreso  ala funcion agregargenero");
     const genero ={ nombre: document.getElementById("txtGenero").value} 
-    const url = "/generos/"
+    const url = "/generos"
 
     fetch(url, {
         method: 'POST',
@@ -11,17 +11,19 @@ function agregarGenero() {
         body: JSON.stringify(genero)
     })
     .then(respuesta => respuesta.json())
-    .then(data => {
-        if (data.status == 200) {
-            location.href = "/generos/"
+    .then(resultado => {
+        if (resultado.message) {
+            swal.fire("Agregar género", resultado.message, "success")
+            setTimeout(function() {
+                location.href = "/generosVista"
+            },2000)
         } else {
-            swal.fire("Error", data.message, "error")
-            alert("Error al agregar el genero")
+            swal.fire("Error", resultado.message, "error")
         }
     })
     .catch(error => {
         console.log(error)
-        alert("Error al agregar el genero")
+        alert("Error al agregar el género")
     })
 }
 
@@ -49,7 +51,6 @@ function agregarPelicula() {
         console.log(resultado)
         if (resultado.message) {
             swal.fire("Agregar Pelicula", resultado.message, "success")
-            // Redirigir a la página de listar películas después de 2 segundos
             setTimeout(function() {
                 location.href = "/listarPeliculas"
             },2000)
@@ -79,6 +80,7 @@ function login() {
         password: passwordIn
     }
     console.log("datos enviados", loginData);
+ 
     fetch(url, {
         method: 'POST',
         headers: {
@@ -86,29 +88,54 @@ function login() {
         },
         body: JSON.stringify(loginData)
     })
-    .then(respuesta => {
-
-        console.log("respuesta", respuesta)
-        if (!respuesta.ok) {
-            throw new Error("Error en la respuesta del servidor");
-        }
-        return respuesta.json()
-    } )
+    .then(respuesta =>  respuesta.json())  
     .then(resultado => {
-        console.log("esta es la data; ", resultado)
+        console.log("esta es la data; ", resultado.message)
         if (resultado.message == "Inicio de sesión exitoso") {
             swal.fire("Iniciando Sesion", resultado.message, "success")
             setTimeout(function() {
                 location.href = "/dash"
             },2000)
         } else {
+            if (resultado.message == "Contraseña incorrecta") {
+                swal.fire("Error", resultado.message, "error")
+                alert("Contraseña incorrecta")
+            } else if (resultado.message == "Usuario no encontrado") {
+                swal.fire("Error", resultado.message, "error")
+                alert("Usuario no encontrado")
+            }
             swal.fire("Error", resultado.message, "error")
-            alert("Error al iniciar sesión")
+            // alert("Error al iniciar sesión", resultado.message)
+        }
+    })
+    .catch(error => {
+        console.log("el error es: ", error)
+        alert("Error al iniciar sesión del catch") 
+    })
+}
+
+function salir(){
+    const url = "/usuarios/logout"
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(respuesta => respuesta.json())
+    .then(resultado => {
+        console.log("esta es la data; ", resultado)
+        if (resultado.message == "Sesión cerrada") {
+            location.href = "/loginVista"
+            alert("Sesion cerrada")
+        } else {
+            swal.fire("Error", resultado.message, "error")
+            alert("Error al cerrar la sesion")
         }
     })
     .catch(error => {
         console.log(error)
-        alert("Error al iniciar sesión")
+        alert("Error al cerrar la sesion")
     })
 }
 
@@ -134,17 +161,46 @@ function editarPelicula(codigo) {
         body: JSON.stringify(pelicula)
     })
     .then(respuesta => respuesta.json())
-    .then(data => {
-        if (data.message == "Pelicula actualizada") {
+    
+    .then(resultado => {
+        console.log("esta es la data; ", resultado)
+        if (resultado.message == "Pelicula actualizada") {
             location.href = "/listarPeliculas"
         } else {
-            swal.fire("Error", data.message, "error")
+            swal.fire("Error", resultado.message, "error")
             alert("Error al editar la pelicula")
         }
     })
     .catch(error => {
         console.log(error)
-        alert("Error al editar la pelicula")
+        alert("Error al editar la pelicula del catch")
+    })
+}
+
+function actualizarGenero(codigo) {
+    const url = "/generos/" + codigo
+    const genero = {
+        nombre: document.getElementById("txtGenero").value
+    }
+    fetch(url, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(genero)
+    })
+    .then(respuesta => respuesta.json())
+    .then(data => {
+        if (data.message == "Genero actualizado") {
+            location.href = "/generosVista"
+        } else {
+            swal.fire("Error", data.message, "error")
+            alert("Error al actualizar el genero")
+        }
+    })
+    .catch(error => {
+        console.log(error)
+        alert("Error al actualizar el genero")
     })
 }
 

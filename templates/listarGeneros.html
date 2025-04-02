@@ -3,11 +3,12 @@
 
 {% block menu %}
     {% include "menu.html" %}
+    <script src="../static/js/app.js"></script>
 
     <div class="container mt-5"> 
         <h3 class=" text-center  ">lista</h3>
         <div>
-            <a href="/vistaGenero">
+            <a href="/agregarGeneroVista">
                 <button type="button" class="btn btn-primary">Agregar Genero</button>
             </a>
         </div>
@@ -24,8 +25,13 @@
                     <tr>
                         <td>{{genero.nombre}}</td>
                         <td>
-                            <i class="fa fa-edit btn btn-primary"></i>
-                            <i class="fa fa-trash btn btn-danger"></i>
+                            <a href="/actualizarGeneroVista/{{genero.id}}">
+                                <i title="Editar" class="fa fa-edit btn btn-primary" ></i> 
+
+                            </a>
+                            <a href="/eliminarGenero/{{genero.id}}">
+                                <i class="fa fa-trash  btn btn-danger" title="Eliminar"></i>
+                            </a>
                         </td>
                     </tr>
                 {% endfor %}    
