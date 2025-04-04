@@ -28,11 +28,14 @@
             </div>
             <div class="mb-3">
                 <label class="form-label" for="cbGenero">Genero:</label>
-                <select class="form-select" name="cbGenero"  id="cbGenero" required>
-                    <option value="" selected>Seleccione: </option>
+                <select class="form-select" name="cbGenero"  id="cbGenero"  required> {{pelicula.genero.id}}
+                    <option value="{{pelicula.genero.id}} " selected>Seleccione: </option>
                     {% for genero in generos %}
-                        <option value="{{genero.id}}">{{genero.nombre}}</option>
+                        <option value="{{genero.id}}">
+                            {{genero.nombre}}
+                        </option>
                     {% endfor %}
+
                 </select>
             </div>
             <div class="mb-3">
@@ -47,6 +50,8 @@
             </div>
         </form>
     </div>
+
+    <script > document.getElementById('cbGenero').value = '{{pelicula.genero.id}}' </script>
 {% endblock %}
 
 {% block piePagina %}

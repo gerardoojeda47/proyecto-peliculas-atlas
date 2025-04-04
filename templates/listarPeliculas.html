@@ -8,6 +8,8 @@
 
 {% block content %}
     <script src="../static/js/app.js"></script>
+    <script src="../static/js/eliminar.js"></script>
+
 
     <div class="container mt-5"> 
         <h3 class=" text-center  ">Lista de peliculas</h3>
@@ -46,9 +48,10 @@
                                 <i title="Editar" class="fa fa-edit btn btn-primary" ></i> 
 
                             </a>
-                            <a href="/eliminarPeliculas/{{pelicula.id}}">
-                                <i class="fa fa-trash  btn btn-danger" title="Eliminar"></i>
-                            </a>
+                            <button class="btn btn-danger" onclick="eliminarPelicula('{{pelicula.id}}')">
+                                <i class="fa fa-trash"></i> 
+                            </button>
+                            
                         </td>
                     </tr>
                 {% endfor %}

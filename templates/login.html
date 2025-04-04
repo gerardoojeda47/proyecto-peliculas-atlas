@@ -1,20 +1,49 @@
-{% extends "index.html" %}
+{% extends "index.html" %} 
 
 {% block content %}
 <script src="../static/js/app.js"></script>
-    <div class="container mt-5"> 
-        <h3 class=" text-center  ">Login</h3>
-        <form id="frmLogin" enctype="multipart/form-data">
-            <h3>Login</h3>
-            <div class="mb-3">
-                <label class="form-label">Usuario:</label>
-                <input type="text" class="form-control" name="txtUser" id="txtUser" required>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Password:</label>
-                <input type="password" class="form-control" name="txtPassword" id="txtPassword" required> 
-            </div>
-            <button type="button" class="btn btn-primary" onclick="login()">Login</button>
-        </form>
+<!-- 🔹 Mensajes Flash (para alertas) -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+ {% if messages%}
+    <div class="container">
+      {% for category, message in messages %}
+      <div class="alert alert-{{ category }} text-center" role="alert">
+        {{ message }}
+      </div>
+      {% endfor %}
     </div>
+  {% endif %} 
+{% endwith %}
+
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="card p-4 shadow-lg" style="width: 350px">
+    <h3 class="text-center mb-3">Login</h3>
+    <form id="frmLogin" enctype="multipart/form-data" class="was-validated">
+      <div class="mb-3">
+        <label class="form-label">Usuario:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="txtUser"
+          id="txtUser"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Password:</label>
+        <input
+          type="password"
+          class="form-control"
+          name="txtPassword"
+          id="txtPassword"
+          required
+        />
+      </div>
+      {{recaptcha}}
+      <button type="button" class="btn btn-primary w-100" onclick="login()">
+        Login
+      </button>
+    </form>
+  </div>
+</div>
 {% endblock %}

@@ -4,6 +4,7 @@
 {% block menu %}
     {% include "menu.html" %}
     <script src="../static/js/app.js"></script>
+    <script src="../static/js/eliminar.js"></script>
 
     <div class="container mt-5"> 
         <h3 class=" text-center  ">lista</h3>
@@ -27,11 +28,11 @@
                         <td>
                             <a href="/actualizarGeneroVista/{{genero.id}}">
                                 <i title="Editar" class="fa fa-edit btn btn-primary" ></i> 
-
                             </a>
-                            <a href="/eliminarGenero/{{genero.id}}">
-                                <i class="fa fa-trash  btn btn-danger" title="Eliminar"></i>
-                            </a>
+                            
+                            <button class="btn btn-danger" onclick="eliminarGenero('{{genero.id}}')">
+                                <i class="fa fa-trash"></i>
+                            </button>                      
                         </td>
                     </tr>
                 {% endfor %}    

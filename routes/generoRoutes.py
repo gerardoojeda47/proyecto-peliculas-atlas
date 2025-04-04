@@ -64,6 +64,7 @@ def get_generos_vista():
         return render_template('error.html', error=str(e)), 500
     
 @app.route('/agregarGeneroVista', methods=['GET'])
+@login_requerido
 def agregar_genero_vista():
     try:
         return render_template('frmAgregarGenero.html'), 200
@@ -72,6 +73,7 @@ def agregar_genero_vista():
     
 
 @app.route('/actualizarGeneroVista/<id>', methods=['GET'])
+@login_requerido
 def actualizar_genero_vista(id):
     try:
         genero = Genero.objects(id=id).first()
@@ -84,6 +86,7 @@ def actualizar_genero_vista(id):
     
     
 @app.route('/eliminarGenero/<id>', methods=['GET'])
+@login_requerido
 def eliminar_genero(id):
     try:
         genero = Genero.objects(id=id).first()
