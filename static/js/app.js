@@ -220,27 +220,3 @@ function actualizarGenero(codigo) {
             alert("Error al actualizar el genero")
         })
 }
-
-//otra forma de hacerlo mediante JS
-// function eliminarPelicula(codigo) {
-//     const url = "/peliculas/" + codigo
-//     fetch(url, {
-//         method: 'DELETE',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         }
-//     })
-//     .then(respuesta => respuesta.json())
-//     .then(data => {
-//         if (data.message == "Pelicula eliminada") {
-//             location.href = "/listarPeliculas"
-//         } else {
-//             swal.fire("Error", data.message, "error")
-//             alert("Error al eliminar la pelicula")
-//         }
-//     })
-//     .catch(error => {
-//         console.log(error)
-//         alert("Error al eliminar la pelicula")
-//     })
-// }
